@@ -6,7 +6,7 @@ before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
  - ln -s ansible-mig-agentsbuild ../mig-agentsbuild
-# - ./get-dependencies.sh
+ - ./get-dependencies.sh
 ## for local travis execution as we use same default.yml than kitchen
  - mkdir /tmp/kitchen
  - ln -s /home/travis/build/juju4/ansible-mig-agentsbuild/test/integration/default/tmp /tmp/kitchen/tmp
