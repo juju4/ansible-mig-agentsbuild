@@ -1,0 +1,48 @@
+---
+
+mig_user: "_mig"
+mig_home: "/home/{{ mig_user }}"
+
+## agents building
+mig_gover: 1.6.2
+mig_gopath: "{{ mig_home }}/go"
+mig_goroot: "/usr/local/go"
+mig_src: "{{ mig_gopath }}/src/mig.ninja/mig"
+
+## agents config: need to retrieve agent.crt, agent.key, ca.crt
+mig_api_host: localhost
+mig_api_port: 1664
+mig_rabbitmq_host: localhost
+mig_rabbitmq_port: 5672
+mig_rabbitmq_vhost: mig
+mig_rabbitmq_agentpass: xxx
+mig_rabbitmq_clientdir: "/home/{{ mig_user }}/client"
+mig_rabbitmq_cadir: "/home/{{ mig_user }}/ca"
+mig_rabbitmq_cacertcrt: "{{ mig_rabbitmq_cadir }}/ca.crt"
+
+mig_url: "http://{{ mig_api_host }}"
+
+## agent will use those proxy as rescue network access if direct access not working
+#mig_proxy_list: '{`proxy.example.net:3128`, `proxy2.example.net:8080`}'
+mig_proxy_list: ''
+
+## only enable if files/information are available
+#mig_client_investigators:
+#    - { realname: "MIG Example investigator", fingerprint: 'C070C873FDC2B5284C1D60089D6B3D2F773F5860', pubkeyfile: "files/vagrant.asc", pubkey: "{{ lookup('file', 'files/vagrant.asc') }}", weight: 2 }
+## Note: don't try to lookup on same line var or get:
+##   UnicodeDecodeError: 'utf8' codec can't decode byte 0x99 in position 0: invalid start byte
+## ex:
+##    - { realname: 'MIG Dupont Investigator', fingerprint: "{{ lookup('file', 'tmp/dupont-fingerprint') }}", pubkeyfile: "tmp/dupont.asc", pubkey: "{{ lookup('file', gpg_pubkeyfile) }}", weight: 2 }
+
+mig_rabbitmqcert_push: false
+mig_rabbitmqcert_ca: tmp/ca.crt
+mig_rabbitmqcert_agentkey: tmp/agent.key
+mig_rabbitmqcert_agentcrt: tmp/agent.crt
+
+mig_agentpkg_pull: false
+mig_agentpkg_pulldir: tmp
+mig_agentpkg_list:
+  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent_latest-x86_64.deb"
+  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent-latest-x86_64.rpm"
+  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent-latest-win64.exe"
+

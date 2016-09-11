@@ -1,0 +1,35 @@
+---
+
+#- fail: msg="This role is only compatible with Ubuntu"
+#  when: ansible_distribution != 'Ubuntu'
+
+- name: Include version-specific variables for Ubuntu.
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+  when: ansible_distribution == 'Ubuntu'
+- name: Include version-specific variables for RedHat
+  include_vars: "RedHat-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == "RedHat" or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: install agents build dependencies
+  package: name={{ item }} state=present
+  with_items:
+    - acl
+    - git
+    - rpm
+
+#- include: debian.yml
+#  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+#- include: redhat.yml
+#  when: ansible_os_family == "RedHat" or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- include: mig-source-retrieve.yml
+
+- include: rabbitmq-certificates-push.yml
+  when: mig_rabbitmqcert_push is defined and mig_rabbitmqcert_push
+
+- include: agents-building.yml
+
+- include: agentpkg-pull.yml
+  when: mig_agentpkg_pull is defined and mig_agentpkg_pull
+

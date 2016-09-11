@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+#  vars:
+#    - a:
+  roles:
+    - golang
+    - mig-agentsbuild
+

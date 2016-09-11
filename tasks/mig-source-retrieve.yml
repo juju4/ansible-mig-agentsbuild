@@ -1,0 +1,51 @@
+---
+- name: Check to see if specified Go version is already installed
+  stat: path=/usr/local/go-{{ mig_gover }}
+  register: go_installed
+
+- name: Add mig_user user
+  user: "name={{ mig_user }} home={{ mig_home }}"
+  become: yes
+
+- stat: path="{{ mig_home }}/.bashrc"
+  register: homemiguser
+#- debug: var=homemiguser
+
+## FIXME! not finding
+- name: Update PATH and GOPATH in bashrc - mig_user
+  lineinfile:
+    dest: "{{ item.d }}"
+    line: "{{ item.l }}"
+    regexp: "{{ item.r }}"
+    insertafter: EOF
+    state: present
+    create: False
+  with_items:
+    - { d: "{{ mig_home }}/.bashrc", r: "go/bin", l: 'export PATH=$PATH\:/usr/local/go/bin\:$HOME/go/bin' }
+    - { d: "{{ mig_home }}/.bashrc", r: "GOPATH={{ mig_gopath }}", l: "export GOPATH={{ mig_gopath }}" }
+## on centos7, missing this for fpm
+    - { d: "{{ mig_home }}/.bashrc", r: "/usr/local/bin", l: 'export PATH=$PATH\:/usr/local/bin' }
+  become: yes
+  become_user: "{{ mig_user }}"
+  when: homemiguser.stat.exists
+
+- stat: path="{{ mig_src }}"
+  register: godir
+## FIXME! not idempotent
+## No Golang modules for ansible currently
+- name: Get mig repository through 'go get'
+  command: "{{ item }}"
+  with_items:
+    - "go get mig.ninja/mig"
+    - "go get github.com/mozilla/masche/cresponse"
+  become: yes
+  become_user: "{{ mig_user }}"
+  environment:
+    GOPATH: "{{ mig_gopath }}"
+    GOROOT: "{{ mig_goroot }}"
+  when: not godir.stat.exists
+
+- name: Ensure mig configuration dir exists
+  file: "dest=/etc/mig state=directory mode=0750 owner=root group={{ mig_user }}"
+  become: yes
+

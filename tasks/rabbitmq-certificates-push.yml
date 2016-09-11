@@ -1,0 +1,9 @@
+---
+
+- name: push rabbitmq agent certificate on agent build server
+  copy: src="tmp/{{ item }}" dest="/etc/mig" mode=0400 owner="{{ mig_user }}"
+  with_items:
+    - ca.crt
+    - agent.key
+    - agent.crt
+

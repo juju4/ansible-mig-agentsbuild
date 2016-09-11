@@ -1,0 +1,7 @@
+---
+
+- name: fetch files to orchestrator
+  fetch: "src={{ item }} dest={{ mig_agentpkg_pulldir }}/ flat=yes"
+  with_items: "{{ mig_agentpkg_list }}"
+  when: mig_agentpkg_pull is defined and mig_agentpkg_pull
+

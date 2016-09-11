@@ -1,0 +1,7 @@
+---
+
+mig_gem:
+  - ruby
+  - ruby-dev
+  - rpm
+
