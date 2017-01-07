@@ -4,6 +4,6 @@
 #  vars:
 #    - a:
   roles:
-    - golang
-    - mig-agentsbuild
+    - juju4.golang
+    - juju4.mig-agentsbuild
 
