@@ -1,6 +1,7 @@
 ---
 
-
 mig_gem:
   - ruby
   - ruby-devel
+  - gcc
+
