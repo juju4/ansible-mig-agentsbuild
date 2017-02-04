@@ -4,5 +4,5 @@ mig_gem:
   - ruby
   - ruby-dev
   - rpm
-  - gcc
+  - libffi-dev
 

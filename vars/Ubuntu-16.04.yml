@@ -4,5 +4,5 @@ mig_gem:
   - ruby
   - ruby-dev
   - wixl
-  - gcc
+  - libffi-dev
 

@@ -16,6 +16,8 @@
     - acl
     - git
     - rpm
+    - gcc
+    - make
 
 #- include: debian.yml
 #  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

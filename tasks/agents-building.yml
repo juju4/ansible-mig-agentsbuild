@@ -34,6 +34,7 @@
   command: "find /usr/local/bin $HOME/.gem $HOME/.rvm -type f -name fpm"
   ignore_errors: true
   register: findfpm
+  changed_when: false
 - debug: var=findfpm
 
 - debug: var=mig_user
