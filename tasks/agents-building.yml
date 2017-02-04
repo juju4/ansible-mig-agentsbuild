@@ -9,6 +9,7 @@
 
 ## Note: might be affected if default system umask is not 022...
 ## in some environment, user install seems needed
+## FIXME! travis/trusty no fpm... ok kitchen
 - name: install gem fpm for agent packaging - system
   gem: name=fpm state=present user_install=no
 - name: install gem fpm for agent packaging - user
