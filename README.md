@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/juju4/ansible-mig-agentsbuild.svg?branch=master)](https://travis-ci.org/juju4/ansible-mig-agentsbuild)
+[![Build Status - Master](https://travis-ci.org/juju4/ansible-mig-agentsbuild.svg?branch=master)](https://travis-ci.org/juju4/ansible-mig-agentsbuild)
+[![Build Status - Devel](https://travis-ci.org/juju4/ansible-mig-agentsbuild.svg?branch=devel)](https://travis-ci.org/juju4/ansible-mig-agentsbuild/branches)
+
 # MIG Agents build ansible role
 
 Ansible role to build client package of MIG agents
@@ -10,6 +12,7 @@ http://mig.mozilla.org/
 ### Ansible
 It was tested on the following versions:
  * 2.0
+ * 2.2
 
 ### Operating systems
 
@@ -23,7 +26,7 @@ For example
 ```
 - host: all
   roles:
-    - mig-agentsbuild
+    - juju4.mig-agentsbuild
 ```
 
 ## Variables
@@ -74,14 +77,14 @@ Default kitchen config (.kitchen.yml) is lxd-based, while (.kitchen.vagrant.yml)
 Once you ensured all necessary roles are present, You can test with:
 ```
 $ gem install kitchen-ansible kitchen-lxd_cli kitchen-sync kitchen-vagrant
-$ cd /path/to/roles/mig-agentsbuild
+$ cd /path/to/roles/juju4.mig-agentsbuild
 $ kitchen verify
 $ kitchen login
 $ KITCHEN_YAML=".kitchen.vagrant.yml" kitchen verify
 ```
 or
 ```
-$ cd /path/to/roles/mig-agentsbuild/test/vagrant
+$ cd /path/to/roles/juju4.mig-agentsbuild/test/vagrant
 $ vagrant up
 $ vagrant ssh
 ```
