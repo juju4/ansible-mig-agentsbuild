@@ -165,8 +165,11 @@
       register: migagentbin2
     ## FIXME! fails silently, dependencies missing
     - name: Build MIG platform cross-platform agent - windows
-    #  command: "make mig-agent msi-agent chdir={{ mig_src }}"
-      command: "make mig-agent chdir={{ mig_src }} creates={{ mig_src }}/bin/linux/amd64/mig-agent-latest.exe"
+      command: "make msi-agent OS=windows"
+#      command: "make mig-agent"
+      args:
+        chdir: "{{ mig_src }}"
+        creates: "{{ mig_src }}/bin/windows/amd64/mig-agent-latest.exe"
       environment:
         PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/usr/local/go/bin"
         GOPATH: "{{ mig_gopath }}"
@@ -177,8 +180,7 @@
       become_user: "{{ mig_user }}"
       when: not migagentbin2.stat.exists
     - name: get current name of rpm mig-agent package
-    ## FIXME! strange path for windows executable?
-      shell: "ls -Art {{ mig_src }}/bin/linux/amd64/mig-agent-*.exe | grep -v latest | tail -1"
+      shell: "ls -Art {{ mig_src }}/bin/windows/amd64/mig-agent-*.exe | grep -v latest | tail -1"
       register: migagentpkg2c
       changed_when: False
     #- debug: var=migagentpkg2c

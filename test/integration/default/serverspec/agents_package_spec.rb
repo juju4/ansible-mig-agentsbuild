@@ -11,7 +11,7 @@ describe command('ls -al /home/_mig/go/src/mig.ninja/mig/mig-agent*.rpm') do
   its(:stdout) { should match /rpm/ }
 end
 
-describe command('ls -al /home/_mig/go/src/mig.ninja/mig/bin/linux/amd64/mig-agent*.exe'), :if => os[:family] == 'ubuntu' && os[:release] == '16.04' do
+describe command('ls -al /home/_mig/go/src/mig.ninja/mig/bin/windows/amd64/mig-agent*.exe'), :if => os[:family] == 'ubuntu' && os[:release] == '16.04' do
   its(:stdout) { should match /exe/ }
 end
 

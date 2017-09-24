@@ -5,4 +5,4 @@ mig_gem:
   - ruby-dev
   - wixl
   - libffi-dev
-
+  - msitools
