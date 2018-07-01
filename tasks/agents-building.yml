@@ -41,11 +41,13 @@
 - debug: var=mig_src
 - name: Set Agent configuration - mig-agent.cfg
 #  template: src=mig-agent-conf.go dest={{ mig_home }}/mig/conf/mig-agent-conf.go owner={{ mig_user }}
-  command: "rsync -ci {{ mig_src }}/conf/mig-agent.cfg.inc {{ mig_src }}/conf/mig-agent.cfg creates={{ mig_src }}/conf/mig-agent.cfg"
-  register: rsync_result
-  changed_when: 'rsync_result.stdout != ""'
-  become: yes
-  become_user: "{{ mig_user }}"
+  copy:
+    src: "{{ mig_src }}/conf/mig-agent.cfg.inc"
+    dest: "{{ mig_src }}/conf/mig-agent.cfg"
+    remote_src: true
+    backup: yes
+    owner: "{{ mig_user }}"
+
 - name: update agent configuration - mig-agent.cfg
 #  replace: dest="{{ mig_src }}/conf/mig-agent.cfg" regexp="{{ item.re }}" replace="{{ item.rep }}"
 #  with_items:
