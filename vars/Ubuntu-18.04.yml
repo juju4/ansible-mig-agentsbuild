@@ -1,0 +1,8 @@
+---
+
+mig_gem:
+  - ruby
+  - ruby-dev
+  - wixl
+  - libffi-dev
+  - msitools
