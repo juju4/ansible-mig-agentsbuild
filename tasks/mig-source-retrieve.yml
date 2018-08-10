@@ -36,7 +36,8 @@
 - name: Get mig repository through 'go get'
   command: "{{ item }}"
   with_items:
-    - "go get mig.ninja/mig"
+#    - "go get mig.ninja/mig"
+    - go get github.com/mozilla/mig
     - "go get github.com/mozilla/masche/cresponse"
   become: yes
   become_user: "{{ mig_user }}"
