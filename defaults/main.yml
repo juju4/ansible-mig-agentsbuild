@@ -7,7 +7,7 @@ mig_home: "/home/{{ mig_user }}"
 mig_gover: 1.6.2
 mig_gopath: "{{ mig_home }}/go"
 mig_goroot: "/usr/local/go"
-mig_src: "{{ mig_gopath }}/src/mig.ninja/mig"
+mig_src: "{{ mig_gopath }}/src/github.com/mozilla/mig"
 
 ## agents config: need to retrieve agent.crt, agent.key, ca.crt
 mig_api_host: localhost
@@ -42,7 +42,7 @@ mig_rabbitmqcert_agentcrt: tmp/agent.crt
 mig_agentpkg_pull: false
 mig_agentpkg_pulldir: tmp
 mig_agentpkg_list:
-  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent_latest-x86_64.deb"
-  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent-latest-x86_64.rpm"
-  - "{{ mig_home }}/go/src/mig.ninja/mig/mig-agent-latest-win64.exe"
+  - "{{ mig_src }}/mig-agent_latest-x86_64.deb"
+  - "{{ mig_src }}/mig-agent-latest-x86_64.rpm"
+  - "{{ mig_src }}/mig-agent-latest-win64.exe"
 
