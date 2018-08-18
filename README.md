@@ -41,7 +41,7 @@ mig_home: "/home/{{ mig_user }}"
 ## agents building
 mig_gover: 1.6.2
 mig_gopath: "{{ mig_home }}/go"
-mig_src: "{{ mig_gopath }}/src/mig.ninja/mig"
+mig_src: "{{ mig_gopath }}/src/github.com/mozilla/mig"
 
 ## agents config: need to retrieve agent.crt, agent.key, ca.crt
 mig_api_host: localhost
